@@ -1,32 +1,30 @@
 import { useState, useEffect } from "react";
 import profimg from "../public/profile.png";
-import { db } from "./firebase";
-import { collection, getDocs } from "firebase/firestore";
 import About from "./Components/About";
 import Skills from "./Components/Skills";
 import Connect from "./Components/Connect";
 
 
-const fetchDataFromFirebase = async () => {
-    const querySnapshot = await getDocs(collection(db, "users"));
-    const data = [];
-    querySnapshot.forEach((doc) => {
-        data.push({ id: doc.id, ...doc.data()});
-    });
-    return data;
-}
+// const fetchDataFromFirebase = async () => {
+//     const querySnapshot = await getDocs(collection(db, "users"));
+//     const data = [];
+//     querySnapshot.forEach((doc) => {
+//         data.push({ id: doc.id, ...doc.data()});
+//     });
+//     return data;
+// }
 
 
 function Profile() {
 
-    const [userData, setUserData] = useState([]);
-    useEffect(() => {
-        async function fetchData() {
-            const data = await fetchDataFromFirebase();
-            setUserData(data);
-        }
-        fetchData();
-    }, []);
+    // const [userData, setUserData] = useState([]);
+    // useEffect(() => {
+    //     async function fetchData() {
+    //         const data = await fetchDataFromFirebase();
+    //         setUserData(data);
+    //     }
+    //     fetchData();
+    // }, []);
 
     const [toggle, setToggle] = useState(1);
     const toggleTab = (id) => {
@@ -78,8 +76,10 @@ function Profile() {
                                 </li>
                             </ul>
 
+                            {/* About */}
                             <div className={toggle == 1 ? "about mt-3" : "d-none"} >
-                                <div className="row text-md-start text-center">                                    
+                                <About rollnum="715521104004"/>
+                                {/* <div className="row text-md-start text-center">                                    
                                     {userData.map(user => (
                                         <>
                                             <About title="Name" value={user.name} />
@@ -92,7 +92,7 @@ function Profile() {
                                             <About title="Mobile" value={user.mobile} />
                                         </>
                                     ))}    
-                                </div>
+                                </div> */}
                             </div>
 
                             {/* ACTIVITIES SECTION */}
